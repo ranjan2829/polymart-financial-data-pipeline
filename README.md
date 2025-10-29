@@ -1,6 +1,6 @@
 # Polymart Financial Data Pipeline
 
-A clean, production-ready system for fetching, analyzing, and generating AI insights on Polymarket financial data.
+A production-ready system that fetches US/Crypto/Fed events from Polymarket API, filters by volume (≥$5M), stores in PostgreSQL, and tracks real-time changes. Generates AI-powered market insights using OpenAI for Fed, Trump, and financial events. Monolith client handles data fetching, comparison, and analysis with clean JSON output.
 
 ## 🚀 Quick Start
 
