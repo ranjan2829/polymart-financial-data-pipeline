@@ -1,8 +1,4 @@
 #!/usr/bin/env python3
-"""
-AI-Powered Polymarket Analysis
-Generates AI insights on market changes and what happened
-"""
 
 import asyncio
 import json
@@ -19,7 +15,7 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     database_url: str = "postgresql://ranjanshahajishitole@localhost:5432/polymarket_db"
-    openai_api_key: str = ""  # Set via environment variable
+    openai_api_key: str = ""
     
     class Config:
         env_file = ".env"
@@ -46,7 +42,6 @@ class AIAnalyzer:
         return self.db_conn
     
     def fetch_recent_differences(self, limit: int = None, fed_trump_finance_only: bool = False) -> List[Dict[str, Any]]:
-        """Fetch recent differences for analysis"""
         conn = self.get_db_connection()
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         
@@ -93,7 +88,6 @@ class AIAnalyzer:
         return results
     
     def extract_key_changes(self, differences_data: Dict[str, Any]) -> Dict[str, Any]:
-        """Extract comprehensive market changes"""
         changes = {
             'volume_change': None,
             'volume24hr_change': None,
@@ -110,7 +104,6 @@ class AIAnalyzer:
             }
         }
         
-        # Volume change
         if 'volume' in differences_data and differences_data['volume']:
             vol_data = differences_data['volume']
             if isinstance(vol_data, dict):
@@ -130,10 +123,9 @@ class AIAnalyzer:
                 changes['market_metrics']['new_volume'] = new_vol
                 changes['market_metrics']['volume_difference'] = diff
                 
-                if abs(percent_change) > 0.5:  # Lower threshold for more data
+                if abs(percent_change) > 0.5:
                     changes['significant_events'].append(f"Volume {'increased' if percent_change > 0 else 'decreased'} by {abs(percent_change):.1f}% (${diff:,.0f})")
         
-        # 24h Volume change
         if 'volume24hr' in differences_data and differences_data['volume24hr']:
             vol24_data = differences_data['volume24hr']
             if isinstance(vol24_data, dict):
@@ -153,7 +145,6 @@ class AIAnalyzer:
                 if abs(percent_change) > 1:
                     changes['significant_events'].append(f"24h Volume {'increased' if percent_change > 0 else 'decreased'} by {abs(percent_change):.1f}% (${diff:,.0f})")
         
-        # Liquidity change
         if 'liquidity' in differences_data and differences_data['liquidity']:
             liq_data = differences_data['liquidity']
             if isinstance(liq_data, dict):
@@ -173,10 +164,9 @@ class AIAnalyzer:
                 changes['market_metrics']['new_liquidity'] = new_liq
                 changes['market_metrics']['liquidity_difference'] = diff
                 
-                if abs(percent_change) > 2:  # Lower threshold
+                if abs(percent_change) > 2:
                     changes['significant_events'].append(f"Liquidity {'increased' if percent_change > 0 else 'decreased'} by {abs(percent_change):.1f}% (${diff:,.0f})")
         
-        # Liquidity CLOB change
         if 'liquidity_clob' in differences_data and differences_data['liquidity_clob']:
             clob_data = differences_data['liquidity_clob']
             if isinstance(clob_data, dict):
@@ -199,7 +189,6 @@ class AIAnalyzer:
         return changes
     
     def categorize_topic(self, event_data: Dict[str, Any]) -> str:
-        """Categorize the topic type"""
         if event_data.get('is_crypto'):
             return 'crypto'
         elif event_data.get('is_financial'):
@@ -210,12 +199,10 @@ class AIAnalyzer:
             return 'other'
     
     async def get_ai_analysis(self, event_title: str, event_description: str, changes: Dict[str, Any], topic: str) -> str:
-        """Get AI analysis of what happened"""
         if not settings.openai_api_key:
             return "OpenAI API key not configured. Please set OPENAI_API_KEY in .env file."
         
         try:
-            # Create a detailed prompt
             prompt = f"""
 Analyze this Polymarket event and provide comprehensive market insights:
 
@@ -278,7 +265,6 @@ Be specific, detailed, and provide actionable insights. Use the actual numbers a
     
     
     async def analyze_events(self, limit: int = None, fed_trump_finance_only: bool = False) -> List[Dict[str, Any]]:
-        """Analyze events with AI insights"""
         limit_text = f"{limit} events" if limit else "all events"
         filter_text = " (Fed/Trump/Finance only)" if fed_trump_finance_only else ""
         logger.info(f"Fetching recent differences for {limit_text}{filter_text}...")
@@ -291,14 +277,11 @@ Be specific, detailed, and provide actionable insights. Use the actual numbers a
             try:
                 logger.info(f"Analyzing: {event.get('event_title', 'Unknown')}")
                 
-                # Extract key changes
                 differences_data = event.get('differences_data', {})
                 changes = self.extract_key_changes(differences_data)
                 
-                # Categorize topic
                 topic = self.categorize_topic(event)
                 
-                # Get AI analysis
                 ai_analysis = await self.get_ai_analysis(
                     event.get('event_title', ''),
                     event.get('event_description', ''),
@@ -306,7 +289,6 @@ Be specific, detailed, and provide actionable insights. Use the actual numbers a
                     topic
                 )
                 
-                # Detailed output
                 analysis = {
                     'topic': event.get('event_title'),
                     'description': event.get('event_description', '')[:200] + '...',
@@ -332,7 +314,6 @@ Be specific, detailed, and provide actionable insights. Use the actual numbers a
         return analyzed_events
     
     def save_analysis(self, analysis_data: List[Dict[str, Any]], filename: str = 'ai_market_analysis.json'):
-        """Save AI analysis results to JSON"""
         output = {
             'analysis_timestamp': datetime.now(timezone.utc).isoformat(),
             'total_topics_analyzed': len(analysis_data),
@@ -370,7 +351,6 @@ async def main():
         print(f"Topics analyzed: {output['total_topics_analyzed']}")
         print(f"Results saved to: {args.output}")
         
-        # Print AI insights
         print(f"\n=== AI INSIGHTS ===")
         for topic in analysis_data:
             print(f"\n📊 {topic['topic']} ({topic['category'].upper()})")

@@ -1,8 +1,4 @@
 #!/usr/bin/env python3
-"""
-Polymarket Monolith Client
-Complete solution for fetching, filtering, storing, and comparing Polymarket data
-"""
 
 import asyncio
 import json
@@ -36,7 +32,6 @@ class PolymarketClient:
         self.client = httpx.AsyncClient(timeout=30.0)
         self.db_conn = None
         
-        # Keywords for classification
         self.financial_keywords = [
             'bitcoin', 'btc', 'ethereum', 'eth', 'crypto', 'cryptocurrency',
             'stock', 'stocks', 'nasdaq', 's&p', 'dow', 'dow jones',

@@ -1,8 +1,4 @@
--- Generated SQL INSERT statements from polymarket_data.json
--- Generated at: 2025-10-29 15:16:51
--- Total events: 26
 
--- Insert events data
 INSERT INTO events (
     id, title, description, end_date, active, liquidity, volume,
     volume24hr, liquidity_clob, resolution_source, is_financial,
@@ -170,7 +166,6 @@ ON CONFLICT (id) DO UPDATE SET
     is_excluded = EXCLUDED.is_excluded,
     updated_at = CURRENT_TIMESTAMP;
 
--- Insert markets data
 INSERT INTO markets (
     id, event_id, question, end_date, liquidity, volume, volume24hr,
     outcomes, outcome_prices, active, description
@@ -221,7 +216,6 @@ ON CONFLICT (id) DO UPDATE SET
     description = EXCLUDED.description,
     updated_at = CURRENT_TIMESTAMP;
 
--- Insert sync log entry
 INSERT INTO data_sync_log (
     total_events, total_volume, total_liquidity, financial_events,
     crypto_events, politics_war_events, high_volume_events, sync_status
@@ -236,22 +230,15 @@ INSERT INTO data_sync_log (
     'success'
 );
 
--- Useful queries for data analysis
 
--- Get all events with market statistics
 SELECT * FROM events_with_market_stats ORDER BY volume DESC;
 
--- Get high-volume events (>= $5M)
 SELECT * FROM high_volume_events;
 
--- Get active events with recent activity
 SELECT * FROM active_events_recent;
 
--- Get financial events
 SELECT * FROM events WHERE is_financial = true AND active = true ORDER BY volume DESC;
 
--- Get crypto events
 SELECT * FROM events WHERE is_crypto = true AND active = true ORDER BY volume DESC;
 
--- Get war/conflict events
 SELECT * FROM events WHERE is_big_event = true AND active = true ORDER BY volume DESC;

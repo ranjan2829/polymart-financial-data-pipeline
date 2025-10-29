@@ -1,4 +1,3 @@
--- Polymarket Database Schema
 CREATE TABLE IF NOT EXISTS events (
     id BIGINT PRIMARY KEY,
     title VARCHAR(500) NOT NULL,
@@ -48,7 +47,6 @@ CREATE TABLE IF NOT EXISTS data_sync_log (
     error_message TEXT
 );
 
--- Indexes
 CREATE INDEX IF NOT EXISTS idx_events_active ON events(active);
 CREATE INDEX IF NOT EXISTS idx_events_volume ON events(volume DESC);
 CREATE INDEX IF NOT EXISTS idx_events_volume24hr ON events(volume24hr DESC);
@@ -64,7 +62,6 @@ CREATE INDEX IF NOT EXISTS idx_markets_active ON markets(active);
 
 CREATE INDEX IF NOT EXISTS idx_sync_log_timestamp ON data_sync_log(sync_timestamp DESC);
 
--- Triggers
 CREATE OR REPLACE FUNCTION update_events_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -91,7 +88,6 @@ CREATE TRIGGER update_markets_updated_at
     FOR EACH ROW
     EXECUTE FUNCTION update_markets_updated_at();
 
--- Views
 CREATE OR REPLACE VIEW events_with_market_stats AS
 SELECT 
     e.*,

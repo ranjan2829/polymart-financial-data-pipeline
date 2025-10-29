@@ -57,6 +57,9 @@ python3 polymarket_client.py fetch --verbose
 # Generate AI insights (requires OpenAI API key)
 python3 ai_analyze.py --limit 10
 
+# Analyze all Fed/Trump/Finance events
+python3 ai_analyze.py --fed-trump-finance
+
 # Custom output file
 python3 ai_analyze.py --limit 5 --output my_analysis.json
 
@@ -78,7 +81,9 @@ echo "OPENAI_API_KEY=sk-your-key-here" > .env
 - **Database Storage**: PostgreSQL with proper schema and indexes
 - **Data Comparison**: Tracks changes in volume, liquidity, prices
 - **AI Analysis**: Real OpenAI insights on market dynamics
-- **Clean Output**: Simple JSON with just topic + AI response
+- **Smart Filtering**: Focus on Fed/Trump/Finance events with --fed-trump-finance flag
+- **Detailed Analysis**: Comprehensive market insights with risk assessment
+- **Clean Output**: Structured JSON with topic, metrics, and AI response
 
 ## 🗄️ Database Schema
 

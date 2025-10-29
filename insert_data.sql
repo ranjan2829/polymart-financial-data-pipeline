@@ -1,4 +1,3 @@
--- Sample data insertion
 INSERT INTO events (
     id, title, description, end_date, active, liquidity, volume, 
     volume24hr, liquidity_clob, resolution_source, is_financial, 
@@ -53,7 +52,6 @@ INSERT INTO data_sync_log (
     25, 1049211271.78, 50000000.00, 9, 4, 14, 25, 'success'
 );
 
--- Analysis queries
 SELECT 
     e.title,
     e.volume as event_volume,
@@ -73,7 +71,6 @@ WHERE e.active = true
 GROUP BY e.id, e.title, e.volume, e.volume24hr, e.is_financial, e.is_crypto, e.is_big_event
 ORDER BY e.volume DESC;
 
--- Get high-volume markets (>= $5M volume24hr)
 SELECT 
     e.title as event_title,
     m.question as market_question,
@@ -86,7 +83,6 @@ WHERE m.active = true
     AND m.volume24hr >= 5000000
 ORDER BY m.volume24hr DESC;
 
--- Get financial events with their top markets
 SELECT 
     e.title,
     e.volume,
@@ -101,7 +97,6 @@ WHERE e.is_financial = true
     AND m.active = true
 ORDER BY e.volume DESC, m.volume DESC;
 
--- Get crypto events with price predictions
 SELECT 
     e.title,
     e.volume,
@@ -115,7 +110,6 @@ WHERE e.is_crypto = true
     AND m.question ILIKE '%price%'
 ORDER BY e.volume DESC;
 
--- Get war/conflict events
 SELECT 
     e.title,
     e.volume,
@@ -129,7 +123,6 @@ WHERE e.is_big_event = true
     AND m.active = true
 ORDER BY e.volume DESC, m.volume DESC;
 
--- Get recent sync status and statistics
 SELECT 
     sync_timestamp,
     total_events,
@@ -142,7 +135,6 @@ FROM data_sync_log
 ORDER BY sync_timestamp DESC
 LIMIT 5;
 
--- Get volume statistics by category
 SELECT 
     CASE 
         WHEN is_financial THEN 'Financial'
