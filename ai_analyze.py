@@ -75,11 +75,21 @@ class AIAnalyzer:
         return results
     
     def extract_key_changes(self, differences_data: Dict[str, Any]) -> Dict[str, Any]:
-        """Extract only the most important changes"""
+        """Extract comprehensive market changes"""
         changes = {
             'volume_change': None,
+            'volume24hr_change': None,
             'liquidity_change': None,
-            'significant_events': []
+            'liquidity_clob_change': None,
+            'significant_events': [],
+            'market_metrics': {
+                'old_volume': None,
+                'new_volume': None,
+                'old_liquidity': None,
+                'new_liquidity': None,
+                'volume_difference': None,
+                'liquidity_difference': None
+            }
         }
         
         # Volume change
@@ -87,24 +97,86 @@ class AIAnalyzer:
             vol_data = differences_data['volume']
             if isinstance(vol_data, dict):
                 percent_change = vol_data.get('percent_change', 0)
-                if abs(percent_change) > 1:  # Only significant changes
-                    changes['volume_change'] = {
-                        'percent_change': percent_change,
-                        'direction': 'up' if percent_change > 0 else 'down'
-                    }
-                    changes['significant_events'].append(f"Volume {'increased' if percent_change > 0 else 'decreased'} by {abs(percent_change):.1f}%")
+                old_vol = vol_data.get('old', 0)
+                new_vol = vol_data.get('new', 0)
+                diff = vol_data.get('difference', 0)
+                
+                changes['volume_change'] = {
+                    'percent_change': percent_change,
+                    'direction': 'up' if percent_change > 0 else 'down',
+                    'old_value': old_vol,
+                    'new_value': new_vol,
+                    'absolute_change': diff
+                }
+                changes['market_metrics']['old_volume'] = old_vol
+                changes['market_metrics']['new_volume'] = new_vol
+                changes['market_metrics']['volume_difference'] = diff
+                
+                if abs(percent_change) > 0.5:  # Lower threshold for more data
+                    changes['significant_events'].append(f"Volume {'increased' if percent_change > 0 else 'decreased'} by {abs(percent_change):.1f}% (${diff:,.0f})")
+        
+        # 24h Volume change
+        if 'volume24hr' in differences_data and differences_data['volume24hr']:
+            vol24_data = differences_data['volume24hr']
+            if isinstance(vol24_data, dict):
+                percent_change = vol24_data.get('percent_change', 0)
+                old_vol = vol24_data.get('old', 0)
+                new_vol = vol24_data.get('new', 0)
+                diff = vol24_data.get('difference', 0)
+                
+                changes['volume24hr_change'] = {
+                    'percent_change': percent_change,
+                    'direction': 'up' if percent_change > 0 else 'down',
+                    'old_value': old_vol,
+                    'new_value': new_vol,
+                    'absolute_change': diff
+                }
+                
+                if abs(percent_change) > 1:
+                    changes['significant_events'].append(f"24h Volume {'increased' if percent_change > 0 else 'decreased'} by {abs(percent_change):.1f}% (${diff:,.0f})")
         
         # Liquidity change
         if 'liquidity' in differences_data and differences_data['liquidity']:
             liq_data = differences_data['liquidity']
             if isinstance(liq_data, dict):
                 percent_change = liq_data.get('percent_change', 0)
-                if abs(percent_change) > 5:  # Only significant changes
-                    changes['liquidity_change'] = {
-                        'percent_change': percent_change,
-                        'direction': 'up' if percent_change > 0 else 'down'
-                    }
-                    changes['significant_events'].append(f"Liquidity {'increased' if percent_change > 0 else 'decreased'} by {abs(percent_change):.1f}%")
+                old_liq = liq_data.get('old', 0)
+                new_liq = liq_data.get('new', 0)
+                diff = liq_data.get('difference', 0)
+                
+                changes['liquidity_change'] = {
+                    'percent_change': percent_change,
+                    'direction': 'up' if percent_change > 0 else 'down',
+                    'old_value': old_liq,
+                    'new_value': new_liq,
+                    'absolute_change': diff
+                }
+                changes['market_metrics']['old_liquidity'] = old_liq
+                changes['market_metrics']['new_liquidity'] = new_liq
+                changes['market_metrics']['liquidity_difference'] = diff
+                
+                if abs(percent_change) > 2:  # Lower threshold
+                    changes['significant_events'].append(f"Liquidity {'increased' if percent_change > 0 else 'decreased'} by {abs(percent_change):.1f}% (${diff:,.0f})")
+        
+        # Liquidity CLOB change
+        if 'liquidity_clob' in differences_data and differences_data['liquidity_clob']:
+            clob_data = differences_data['liquidity_clob']
+            if isinstance(clob_data, dict):
+                percent_change = clob_data.get('percent_change', 0)
+                old_clob = clob_data.get('old', 0)
+                new_clob = clob_data.get('new', 0)
+                diff = clob_data.get('difference', 0)
+                
+                changes['liquidity_clob_change'] = {
+                    'percent_change': percent_change,
+                    'direction': 'up' if percent_change > 0 else 'down',
+                    'old_value': old_clob,
+                    'new_value': new_clob,
+                    'absolute_change': diff
+                }
+                
+                if abs(percent_change) > 5:
+                    changes['significant_events'].append(f"CLOB Liquidity {'increased' if percent_change > 0 else 'decreased'} by {abs(percent_change):.1f}% (${diff:,.0f})")
         
         return changes
     
@@ -125,23 +197,28 @@ class AIAnalyzer:
             return self.get_mock_analysis(event_title, changes, topic)
         
         try:
-            # Create a focused prompt
+            # Create a detailed prompt
             prompt = f"""
-Analyze this Polymarket event and explain what happened in the market:
+Analyze this Polymarket event and provide comprehensive market insights:
 
 TOPIC: {event_title}
 DESCRIPTION: {event_description[:300]}...
 CATEGORY: {topic.upper()}
 
-KEY CHANGES:
+DETAILED MARKET CHANGES:
 {', '.join(changes.get('significant_events', ['No significant changes']))}
 
-Provide a concise analysis (2-3 sentences) explaining:
-1. What market activity occurred
-2. Why this might have happened
-3. What it suggests about market sentiment
+MARKET METRICS:
+- Volume: ${changes.get('market_metrics', {}).get('old_volume', 0):,.0f} → ${changes.get('market_metrics', {}).get('new_volume', 0):,.0f}
+- Liquidity: ${changes.get('market_metrics', {}).get('old_liquidity', 0):,.0f} → ${changes.get('market_metrics', {}).get('new_liquidity', 0):,.0f}
 
-Focus on the actual market dynamics, not just numbers.
+Provide a detailed analysis (3-4 sentences) covering:
+1. What specific market activity occurred and the magnitude
+2. Potential drivers and catalysts for these changes
+3. Market sentiment implications and trader behavior
+4. Risk assessment and future outlook
+
+Focus on actionable insights and market dynamics.
 """
             
             headers = {
@@ -218,11 +295,20 @@ Focus on the actual market dynamics, not just numbers.
                     topic
                 )
                 
-                # Simple output
+                # Detailed output
                 analysis = {
                     'topic': event.get('event_title'),
+                    'description': event.get('event_description', '')[:200] + '...',
                     'category': topic,
-                    'ai_analysis': ai_analysis
+                    'event_id': event.get('event_id'),
+                    'compared_at': event.get('compared_at').isoformat() if event.get('compared_at') else None,
+                    'market_changes': changes,
+                    'ai_analysis': ai_analysis,
+                    'classification': {
+                        'is_crypto': event.get('is_crypto', False),
+                        'is_financial': event.get('is_financial', False),
+                        'is_big_event': event.get('is_big_event', False)
+                    }
                 }
                 
                 analyzed_events.append(analysis)
