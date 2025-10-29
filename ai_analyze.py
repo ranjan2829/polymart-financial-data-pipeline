@@ -194,7 +194,7 @@ class AIAnalyzer:
     async def get_ai_analysis(self, event_title: str, event_description: str, changes: Dict[str, Any], topic: str) -> str:
         """Get AI analysis of what happened"""
         if not settings.openai_api_key:
-            return self.get_mock_analysis(event_title, changes, topic)
+            return "OpenAI API key not configured. Please set OPENAI_API_KEY in .env file."
         
         try:
             # Create a detailed prompt
@@ -209,8 +209,8 @@ DETAILED MARKET CHANGES:
 {', '.join(changes.get('significant_events', ['No significant changes']))}
 
 MARKET METRICS:
-- Volume: ${changes.get('market_metrics', {}).get('old_volume', 0):,.0f} → ${changes.get('market_metrics', {}).get('new_volume', 0):,.0f}
-- Liquidity: ${changes.get('market_metrics', {}).get('old_liquidity', 0):,.0f} → ${changes.get('market_metrics', {}).get('new_liquidity', 0):,.0f}
+- Volume: ${changes.get('market_metrics', {}).get('old_volume', 0) or 0:,.0f} → ${changes.get('market_metrics', {}).get('new_volume', 0) or 0:,.0f}
+- Liquidity: ${changes.get('market_metrics', {}).get('old_liquidity', 0) or 0:,.0f} → ${changes.get('market_metrics', {}).get('new_liquidity', 0) or 0:,.0f}
 
 Provide a detailed analysis (3-4 sentences) covering:
 1. What specific market activity occurred and the magnitude
@@ -246,27 +246,12 @@ Focus on actionable insights and market dynamics.
                 return result['choices'][0]['message']['content'].strip()
             else:
                 logger.error(f"OpenAI API error: {response.status_code}")
-                return self.get_mock_analysis(event_title, changes, topic)
+                return f"OpenAI API error {response.status_code}. Please check your API key and try again."
                 
         except Exception as e:
             logger.error(f"Error calling OpenAI API: {e}")
-            return self.get_mock_analysis(event_title, changes, topic)
+            return f"OpenAI API error: {str(e)}. Please check your connection and API key."
     
-    def get_mock_analysis(self, event_title: str, changes: Dict[str, Any], topic: str) -> str:
-        """Generate mock analysis when OpenAI is not available"""
-        significant_events = changes.get('significant_events', [])
-        
-        if not significant_events:
-            return f"Market for '{event_title}' showed minimal activity with stable trading conditions."
-        
-        if topic == 'crypto':
-            return f"Crypto market for '{event_title}' experienced {', '.join(significant_events).lower()}, indicating increased speculative interest and volatility in this prediction market."
-        elif topic == 'financial':
-            return f"Financial market for '{event_title}' showed {', '.join(significant_events).lower()}, reflecting institutional trading activity and market sentiment shifts."
-        elif topic == 'politics_war':
-            return f"Geopolitical market for '{event_title}' saw {', '.join(significant_events).lower()}, suggesting heightened uncertainty and hedging behavior around this political event."
-        else:
-            return f"Market for '{event_title}' displayed {', '.join(significant_events).lower()}, indicating changing market dynamics and trader sentiment."
     
     async def analyze_events(self, limit: int = 10) -> List[Dict[str, Any]]:
         """Analyze events with AI insights"""
