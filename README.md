@@ -20,6 +20,30 @@ A production-ready Python pipeline for fetching, filtering, and storing Polymark
 
 ## Quick Start
 
+### Option 1: Monolith Client (Recommended)
+
+1. **Install Dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Setup Database**:
+   ```bash
+   python3 polymarket_client.py setup
+   ```
+
+3. **Fetch Data**:
+   ```bash
+   python3 polymarket_client.py fetch
+   ```
+
+4. **Compare Data**:
+   ```bash
+   python3 polymarket_client.py compare
+   ```
+
+### Option 2: Individual Scripts
+
 1. **Install Dependencies**:
    ```bash
    pip install -r requirements.txt
@@ -54,11 +78,33 @@ A production-ready Python pipeline for fetching, filtering, and storing Polymark
 - **markets**: Individual market questions and outcomes
 - **data_sync_log**: Sync history and statistics
 
+## Monolith Client Commands
+
+```bash
+# Setup database tables
+python3 polymarket_client.py setup
+
+# Fetch and process data (saves to JSON)
+python3 polymarket_client.py fetch --limit 500
+
+# Compare stored vs fresh data
+python3 polymarket_client.py compare
+
+# Verbose logging
+python3 polymarket_client.py fetch --verbose
+
+# Help
+python3 polymarket_client.py --help
+```
+
 ## Files
 
-- `fetch_data.py` - Main data fetching and processing
+- `polymarket_client.py` - **Monolith client (recommended)**
+- `fetch_data.py` - Individual data fetching script
+- `compare_data.py` - Individual comparison script
 - `config.py` - Configuration settings
 - `create_tables.sql` - Database schema
+- `comparison_tables.sql` - Comparison tables schema
 - `json_to_sql.py` - JSON to SQL converter
 - `requirements.txt` - Python dependencies
 
