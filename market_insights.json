@@ -1,0 +1,266 @@
+{
+  "analysis_timestamp": "2025-10-29T15:31:12.813536+00:00",
+  "total_events_analyzed": 10,
+  "crypto_events": 10,
+  "financial_events": 4,
+  "politics_war_events": 9,
+  "events": [
+    {
+      "event_id": 35090,
+      "event_title": "Fed decision in December?",
+      "event_description": "The FED interest rates are defined in this market by the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FO...",
+      "category": "crypto",
+      "compared_at": "2025-10-29T20:39:49.573910+05:30",
+      "metrics": {
+        "volume_change": {
+          "old": 5081424.7,
+          "new": 5154801.189269,
+          "difference": 73376.48926899955,
+          "percent_change": 1.444014102363842
+        },
+        "volume24hr_change": null,
+        "liquidity_change": {
+          "old": 392814.54,
+          "new": 592473.04471,
+          "difference": 199658.50471000007,
+          "percent_change": 50.827676773369966
+        },
+        "significant_changes": [
+          "Liquidity changed by 50.83%"
+        ]
+      },
+      "insight": "Stable volume with 1.4% change | High liquidity injection of 50.8% | Crypto market dynamics suggest high volatility and speculative interest",
+      "is_crypto": true,
+      "is_financial": true,
+      "is_big_event": true
+    },
+    {
+      "event_id": 38010,
+      "event_title": "Will Trump meet with Putin again by...?",
+      "event_description": "On August 15, 2025, U.S. President Donald Trump and Russian President Vladimir Putin met in person at Joint Base Elmendorf-Richardson near Anchorage, Alaska, for a summit focused on potential peace te...",
+      "category": "crypto",
+      "compared_at": "2025-10-29T20:39:49.573907+05:30",
+      "metrics": {
+        "volume_change": {
+          "old": 5120548.28,
+          "new": 5143931.842498,
+          "difference": 23383.56249799952,
+          "percent_change": 0.4566613030352976
+        },
+        "volume24hr_change": null,
+        "liquidity_change": {
+          "old": 89734.17,
+          "new": 73328.46777,
+          "difference": -16405.702229999995,
+          "percent_change": -18.282558617302634
+        },
+        "significant_changes": [
+          "Liquidity changed by -18.28%"
+        ]
+      },
+      "insight": "Stable volume with 0.5% change | Crypto market dynamics suggest high volatility and speculative interest",
+      "is_crypto": true,
+      "is_financial": false,
+      "is_big_event": true
+    },
+    {
+      "event_id": 35908,
+      "event_title": "Who will Trump nominate as Fed Chair?",
+      "event_description": "This market will resolve according to the next individual Donald Trump, as President of the United States, formally nominates to be Chair of the Federal Reserve by December 31, 2026, 11:59 PM ET. \n\nFo...",
+      "category": "crypto",
+      "compared_at": "2025-10-29T20:39:49.573903+05:30",
+      "metrics": {
+        "volume_change": {
+          "old": 5166763.77,
+          "new": 5184758.428785,
+          "difference": 17994.658785000443,
+          "percent_change": 0.3482771728307688
+        },
+        "volume24hr_change": null,
+        "liquidity_change": null,
+        "significant_changes": []
+      },
+      "insight": "Stable volume with 0.3% change | Crypto market dynamics suggest high volatility and speculative interest",
+      "is_crypto": true,
+      "is_financial": true,
+      "is_big_event": true
+    },
+    {
+      "event_id": 33526,
+      "event_title": "Will Polymarket US go live in 2025?",
+      "event_description": "This market will resolve to \"Yes\" if a real-money trade is publicly placed on a regulated, Polymarket-operated Designated Contract Market (DCM) by December 31, 2025, at 11:59 PM ET. Otherwise, this ma...",
+      "category": "crypto",
+      "compared_at": "2025-10-29T20:39:49.573892+05:30",
+      "metrics": {
+        "volume_change": {
+          "old": 5425883.37,
+          "new": 5452043.789728,
+          "difference": 26160.419727999717,
+          "percent_change": 0.4821412099021899
+        },
+        "volume24hr_change": null,
+        "liquidity_change": null,
+        "significant_changes": []
+      },
+      "insight": "Stable volume with 0.5% change | Crypto market dynamics suggest high volatility and speculative interest",
+      "is_crypto": true,
+      "is_financial": false,
+      "is_big_event": false
+    },
+    {
+      "event_id": 26863,
+      "event_title": " 2nd Place in New York City Mayoral Election",
+      "event_description": "The 2025 New York City mayoral election will be held on November 4, 2025, to elect the mayor of New York City.\n\nThis market will resolve according to the candidate candidate that wins the second most ...",
+      "category": "crypto",
+      "compared_at": "2025-10-29T20:39:49.573888+05:30",
+      "metrics": {
+        "volume_change": {
+          "old": 5715974.51,
+          "new": 5739785.052143,
+          "difference": 23810.54214300029,
+          "percent_change": 0.4165613772654891
+        },
+        "volume24hr_change": null,
+        "liquidity_change": {
+          "old": 1205499.39,
+          "new": 1179956.40943,
+          "difference": -25542.980569999898,
+          "percent_change": -2.1188712978112667
+        },
+        "significant_changes": []
+      },
+      "insight": "Stable volume with 0.4% change | Crypto market dynamics suggest high volatility and speculative interest",
+      "is_crypto": true,
+      "is_financial": false,
+      "is_big_event": true
+    },
+    {
+      "event_id": 16817,
+      "event_title": "Which countries will Donald Trump visit in 2025?",
+      "event_description": "If U.S. President Donald Trump visits a listed country between January 15 and December 31, 2025 11:59 PM ET, the relevant market will resolve to \"Yes\". Otherwise, this market will resolve to \"No\".\n\nFo...",
+      "category": "crypto",
+      "compared_at": "2025-10-29T20:39:49.573880+05:30",
+      "metrics": {
+        "volume_change": {
+          "old": 6172441.52,
+          "new": 6174855.725193,
+          "difference": 2414.2051930008456,
+          "percent_change": 0.039112645865956225
+        },
+        "volume24hr_change": null,
+        "liquidity_change": null,
+        "significant_changes": []
+      },
+      "insight": "Stable volume with 0.0% change | Crypto market dynamics suggest high volatility and speculative interest",
+      "is_crypto": true,
+      "is_financial": true,
+      "is_big_event": true
+    },
+    {
+      "event_id": 17413,
+      "event_title": "Will China invade Taiwan in 2025?",
+      "event_description": "This market will resolve to \"Yes\" if China commences a military offensive intended to establish control over any portion of the Republic of China (Taiwan) by December 31, 2025, 11:59 PM ET. Otherwise,...",
+      "category": "crypto",
+      "compared_at": "2025-10-29T20:39:49.573876+05:30",
+      "metrics": {
+        "volume_change": {
+          "old": 6771323.19,
+          "new": 6821940.115124,
+          "difference": 50616.92512399983,
+          "percent_change": 0.7475189664370432
+        },
+        "volume24hr_change": null,
+        "liquidity_change": {
+          "old": 159498.25,
+          "new": 152381.28865,
+          "difference": -7116.961349999998,
+          "percent_change": -4.462093690683125
+        },
+        "significant_changes": []
+      },
+      "insight": "Stable volume with 0.7% change | Crypto market dynamics suggest high volatility and speculative interest",
+      "is_crypto": true,
+      "is_financial": false,
+      "is_big_event": true
+    },
+    {
+      "event_id": 33495,
+      "event_title": "Will Trump meet with Xi Jinping by October 31?",
+      "event_description": "This market will resolve to \"Yes\" if Donald Trump meets with Xi Jinping between July 21, and October 31, 2025, 11:59 PM ET. Otherwise, this market will resolve to \"No\".\n\nAn exchange of words, handshak...",
+      "category": "crypto",
+      "compared_at": "2025-10-29T20:39:49.573873+05:30",
+      "metrics": {
+        "volume_change": {
+          "old": 6782949.5,
+          "new": 7256473.536374,
+          "difference": 473524.0363739999,
+          "percent_change": 6.98109334846146
+        },
+        "volume24hr_change": null,
+        "liquidity_change": {
+          "old": 290442.91,
+          "new": 215860.82706,
+          "difference": -74582.08293999996,
+          "percent_change": -25.678741113012528
+        },
+        "significant_changes": [
+          "Volume changed by 6.98%",
+          "Liquidity changed by -25.68%"
+        ]
+      },
+      "insight": "Moderate positive sentiment with 7.0% volume growth | Significant liquidity withdrawal of -25.7% | Crypto market dynamics suggest high volatility and speculative interest",
+      "is_crypto": true,
+      "is_financial": false,
+      "is_big_event": true
+    },
+    {
+      "event_id": 22987,
+      "event_title": "Who will Trump pardon in 2025?",
+      "event_description": "This market will resolve to \"Yes\" if the listed individual receives a presidential pardon, commutation, or reprieve from Donald Trump by December 31, 2025, 11:59 PM ET. Otherwise, this market will res...",
+      "category": "crypto",
+      "compared_at": "2025-10-29T20:39:49.573870+05:30",
+      "metrics": {
+        "volume_change": {
+          "old": 7183009.83,
+          "new": 7228605.589026,
+          "difference": 45595.759026000276,
+          "percent_change": 0.6347723322828903
+        },
+        "volume24hr_change": null,
+        "liquidity_change": {
+          "old": 235798.72,
+          "new": 223940.64824,
+          "difference": -11858.071759999992,
+          "percent_change": -5.028895729374608
+        },
+        "significant_changes": []
+      },
+      "insight": "Stable volume with 0.6% change | Crypto market dynamics suggest high volatility and speculative interest",
+      "is_crypto": true,
+      "is_financial": true,
+      "is_big_event": true
+    },
+    {
+      "event_id": 16105,
+      "event_title": "Khamenei out as Supreme Leader of Iran in 2025?",
+      "event_description": "This market will resolve to \"Yes\" if Iran's Supreme leader, Ali Khamenei, is removed from power for any length of time between December 28, 2024, and December 31, 2025, 11:59 PM ET. Otherwise, this ma...",
+      "category": "crypto",
+      "compared_at": "2025-10-29T20:39:49.573864+05:30",
+      "metrics": {
+        "volume_change": null,
+        "volume24hr_change": null,
+        "liquidity_change": {
+          "old": 125546.56,
+          "new": 122937.6694,
+          "difference": -2608.890599999999,
+          "percent_change": -2.078026351339295
+        },
+        "significant_changes": []
+      },
+      "insight": "Crypto market dynamics suggest high volatility and speculative interest",
+      "is_crypto": true,
+      "is_financial": false,
+      "is_big_event": true
+    }
+  ]
+}
