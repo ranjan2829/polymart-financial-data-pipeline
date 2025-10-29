@@ -45,12 +45,12 @@ class AIAnalyzer:
             self.db_conn = psycopg2.connect(settings.database_url)
         return self.db_conn
     
-    def fetch_recent_differences(self, limit: int = 10) -> List[Dict[str, Any]]:
+    def fetch_recent_differences(self, limit: int = None, fed_trump_finance_only: bool = False) -> List[Dict[str, Any]]:
         """Fetch recent differences for analysis"""
         conn = self.get_db_connection()
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         
-        cursor.execute("""
+        query = """
             SELECT 
                 dd.event_id,
                 e.title as event_title,
@@ -63,9 +63,27 @@ class AIAnalyzer:
             FROM data_differences dd
             JOIN events e ON dd.event_id = e.id
             WHERE dd.compared_at >= NOW() - INTERVAL '24 hours'
-            ORDER BY dd.compared_at DESC
-            LIMIT %s
-        """, (limit,))
+        """
+        
+        if fed_trump_finance_only:
+            query += """
+                AND (
+                    e.is_financial = true 
+                    OR e.is_big_event = true
+                    OR LOWER(e.title) LIKE '%fed%' 
+                    OR LOWER(e.title) LIKE '%federal reserve%'
+                    OR LOWER(e.title) LIKE '%trump%'
+                    OR LOWER(e.title) LIKE '%fomc%'
+                )
+            """
+        
+        query += " ORDER BY dd.compared_at DESC"
+        
+        if limit:
+            query += " LIMIT %s"
+            cursor.execute(query, (limit,))
+        else:
+            cursor.execute(query)
         
         results = []
         for row in cursor.fetchall():
@@ -259,10 +277,12 @@ Be specific, detailed, and provide actionable insights. Use the actual numbers a
             return f"OpenAI API error: {str(e)}. Please check your connection and API key."
     
     
-    async def analyze_events(self, limit: int = 10) -> List[Dict[str, Any]]:
+    async def analyze_events(self, limit: int = None, fed_trump_finance_only: bool = False) -> List[Dict[str, Any]]:
         """Analyze events with AI insights"""
-        logger.info(f"Fetching recent differences for {limit} events...")
-        events = self.fetch_recent_differences(limit)
+        limit_text = f"{limit} events" if limit else "all events"
+        filter_text = " (Fed/Trump/Finance only)" if fed_trump_finance_only else ""
+        logger.info(f"Fetching recent differences for {limit_text}{filter_text}...")
+        events = self.fetch_recent_differences(limit, fed_trump_finance_only)
         logger.info(f"Found {len(events)} events with recent changes")
         
         analyzed_events = []
@@ -328,9 +348,10 @@ Be specific, detailed, and provide actionable insights. Use the actual numbers a
 
 async def main():
     parser = argparse.ArgumentParser(description='AI-Powered Polymarket Analysis')
-    parser.add_argument('--limit', type=int, default=10, help='Number of events to analyze')
+    parser.add_argument('--limit', type=int, default=None, help='Number of events to analyze (default: all)')
     parser.add_argument('--output', type=str, default='ai_market_analysis.json', help='Output JSON filename')
     parser.add_argument('--verbose', '-v', action='store_true', help='Enable verbose logging')
+    parser.add_argument('--fed-trump-finance', action='store_true', help='Only analyze Fed, Trump, and Finance events')
     
     args = parser.parse_args()
     
@@ -342,7 +363,7 @@ async def main():
     analyzer = AIAnalyzer()
     
     try:
-        analysis_data = await analyzer.analyze_events(args.limit)
+        analysis_data = await analyzer.analyze_events(args.limit, args.fed_trump_finance)
         output = analyzer.save_analysis(analysis_data, args.output)
         
         print(f"\n=== AI ANALYSIS COMPLETE ===")
