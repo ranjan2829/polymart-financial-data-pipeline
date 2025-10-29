@@ -212,13 +212,13 @@ MARKET METRICS:
 - Volume: ${changes.get('market_metrics', {}).get('old_volume', 0) or 0:,.0f} → ${changes.get('market_metrics', {}).get('new_volume', 0) or 0:,.0f}
 - Liquidity: ${changes.get('market_metrics', {}).get('old_liquidity', 0) or 0:,.0f} → ${changes.get('market_metrics', {}).get('new_liquidity', 0) or 0:,.0f}
 
-Provide a detailed analysis (3-4 sentences) covering:
-1. What specific market activity occurred and the magnitude
-2. Potential drivers and catalysts for these changes
-3. Market sentiment implications and trader behavior
-4. Risk assessment and future outlook
+Provide a comprehensive, detailed analysis covering:
+1. What specific market activity occurred and the magnitude (include specific numbers)
+2. Potential drivers and catalysts for these changes (what might have caused this)
+3. Market sentiment implications and trader behavior (what traders are thinking/doing)
+4. Risk assessment and future outlook (what could happen next)
 
-Focus on actionable insights and market dynamics.
+Be specific, detailed, and provide actionable insights. Use the actual numbers and data provided. Write 4-5 complete sentences with comprehensive analysis.
 """
             
             headers = {
@@ -227,11 +227,11 @@ Focus on actionable insights and market dynamics.
             }
             
             data = {
-                "model": "gpt-3.5-turbo",
+                "model": "gpt-4o-mini",
                 "messages": [
                     {"role": "user", "content": prompt}
                 ],
-                "max_tokens": 150,
+                "max_tokens": 500,
                 "temperature": 0.7
             }
             
@@ -243,10 +243,16 @@ Focus on actionable insights and market dynamics.
             
             if response.status_code == 200:
                 result = response.json()
-                return result['choices'][0]['message']['content'].strip()
+                ai_response = result['choices'][0]['message']['content'].strip()
+                logger.debug(f"OpenAI response received: {len(ai_response)} characters")
+                if not ai_response or len(ai_response) < 10:
+                    logger.warning("OpenAI returned empty or very short response")
+                    return "OpenAI API returned an empty response. Please try again."
+                return ai_response
             else:
-                logger.error(f"OpenAI API error: {response.status_code}")
-                return f"OpenAI API error {response.status_code}. Please check your API key and try again."
+                error_text = response.text if hasattr(response, 'text') else 'Unknown error'
+                logger.error(f"OpenAI API error: {response.status_code} - {error_text}")
+                return f"OpenAI API error {response.status_code}: {error_text}"
                 
         except Exception as e:
             logger.error(f"Error calling OpenAI API: {e}")
