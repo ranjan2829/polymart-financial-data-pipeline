@@ -1,90 +1,48 @@
 # Polymart Financial Data Pipeline
 
-A production-ready Python pipeline for fetching, filtering, and storing Polymarket financial data with PostgreSQL integration.
+A clean, production-ready system for fetching, analyzing, and generating AI insights on Polymarket financial data.
 
-## Features
+## 🚀 Quick Start
 
-- **Real-time Data Sync**: Fetches live Polymarket events and markets
-- **Smart Filtering**: Focuses on US/Crypto/Fed/War events with volume ≥$5M
-- **PostgreSQL Integration**: Stores data in normalized database tables
-- **Async Processing**: High-performance async HTTP client
-- **Data Classification**: Automatically categorizes financial, crypto, and political events
+```bash
+# Install dependencies
+pip install -r requirements.txt
 
-## Tech Stack
+# Setup database
+python3 polymarket_client.py setup
 
-- **Python 3.8+** with async/await
-- **httpx** - Async HTTP client
-- **PostgreSQL** - Database storage
-- **SQLAlchemy** - ORM (optional)
-- **Pydantic** - Data validation
+# Fetch and process data
+python3 polymarket_client.py fetch --limit 500
 
-## Quick Start
+# Compare data changes
+python3 polymarket_client.py compare
 
-### Option 1: Monolith Client (Recommended)
+# Generate AI analysis
+python3 ai_analyze.py --limit 10
+```
 
-1. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+## 📁 Project Structure
 
-2. **Setup Database**:
-   ```bash
-   python3 polymarket_client.py setup
-   ```
+```
+polymart-financial-data-pipeline/
+├── polymarket_client.py    # Main client (fetch, compare, setup)
+├── ai_analyze.py          # AI analysis with OpenAI
+├── config.py              # Configuration settings
+├── requirements.txt       # Python dependencies
+├── create_tables.sql      # Database schema
+├── insert_data.sql        # Sample data inserts
+├── comparison_tables.sql  # Data comparison tables
+└── README.md             # This file
+```
 
-3. **Fetch Data**:
-   ```bash
-   python3 polymarket_client.py fetch
-   ```
+## 🛠️ Commands
 
-4. **Compare Data**:
-   ```bash
-   python3 polymarket_client.py compare
-   ```
-
-### Option 2: Individual Scripts
-
-1. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-2. **Setup Database**:
-   ```bash
-   psql -d polymarket_db -f create_tables.sql
-   ```
-
-3. **Run Data Sync**:
-   ```bash
-   python3 fetch_data.py
-   ```
-
-4. **Generate SQL from JSON**:
-   ```bash
-   python3 json_to_sql.py
-   ```
-
-## Data Filtering
-
-- **US Politics**: Trump, elections, government shutdowns
-- **Crypto**: Bitcoin, Ethereum, major cryptocurrencies
-- **Fed Policy**: Interest rates, FOMC decisions, Powell
-- **War/Conflict**: Ukraine, Russia, Israel, geopolitical events
-- **Volume Threshold**: Events ≥$5M, Markets ≥$5M 24hr volume
-
-## Database Schema
-
-- **events**: Main event data with classification flags
-- **markets**: Individual market questions and outcomes
-- **data_sync_log**: Sync history and statistics
-
-## Monolith Client Commands
-
+### Main Client
 ```bash
 # Setup database tables
 python3 polymarket_client.py setup
 
-# Fetch and process data (saves to JSON)
+# Fetch and process data
 python3 polymarket_client.py fetch --limit 500
 
 # Compare stored vs fresh data
@@ -92,22 +50,78 @@ python3 polymarket_client.py compare
 
 # Verbose logging
 python3 polymarket_client.py fetch --verbose
-
-# Help
-python3 polymarket_client.py --help
 ```
 
-## Files
+### AI Analysis
+```bash
+# Generate AI insights (requires OpenAI API key)
+python3 ai_analyze.py --limit 10
 
-- `polymarket_client.py` - **Monolith client (recommended)**
-- `fetch_data.py` - Individual data fetching script
-- `compare_data.py` - Individual comparison script
-- `config.py` - Configuration settings
-- `create_tables.sql` - Database schema
-- `comparison_tables.sql` - Comparison tables schema
-- `json_to_sql.py` - JSON to SQL converter
-- `requirements.txt` - Python dependencies
+# Custom output file
+python3 ai_analyze.py --limit 5 --output my_analysis.json
 
-## License
+# Verbose logging
+python3 ai_analyze.py --limit 10 --verbose
+```
 
-MIT License
+## 🔧 Configuration
+
+Set your OpenAI API key in `.env`:
+```bash
+echo "OPENAI_API_KEY=sk-your-key-here" > .env
+```
+
+## 📊 Features
+
+- **Data Fetching**: Fetches US/Crypto/Fed events from Polymarket API
+- **Data Processing**: Cleans and filters data (≥$5M volume, active events only)
+- **Database Storage**: PostgreSQL with proper schema and indexes
+- **Data Comparison**: Tracks changes in volume, liquidity, prices
+- **AI Analysis**: Real OpenAI insights on market dynamics
+- **Clean Output**: Simple JSON with just topic + AI response
+
+## 🗄️ Database Schema
+
+- `events`: Main event data with classifications
+- `markets`: Market details for each event
+- `data_differences`: Tracks changes over time
+- `market_differences`: Market-level change tracking
+
+## 📈 AI Analysis Output
+
+```json
+{
+  "analysis_timestamp": "2025-10-29T15:39:23.196916+00:00",
+  "total_topics_analyzed": 3,
+  "topics": [
+    {
+      "topic": "Fed decision in December?",
+      "category": "crypto",
+      "ai_analysis": "The increase in volume and liquidity suggests heightened interest..."
+    }
+  ]
+}
+```
+
+## 🎯 Focus Areas
+
+- **US Politics**: Trump-related events, elections
+- **Crypto Markets**: Cryptocurrency predictions
+- **Fed Decisions**: Federal Reserve policy events
+- **War/Conflict**: Geopolitical events
+
+## 📝 Requirements
+
+- Python 3.8+
+- PostgreSQL
+- OpenAI API key (for AI analysis)
+- Internet connection
+
+## 🔄 Workflow
+
+1. **Setup**: Create database tables
+2. **Fetch**: Get latest data from Polymarket
+3. **Compare**: Track changes over time
+4. **Analyze**: Generate AI insights on market dynamics
+
+Clean, simple, and production-ready! 🚀
