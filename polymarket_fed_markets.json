@@ -1,5 +1,5 @@
 {
-  "total_topics": 6,
+  "total_topics": 16,
   "topics": [
     {
       "topic": "Fed decision in December?",
@@ -7,14 +7,39 @@
       "ai_analysis": "The Polymarket event regarding the Fed's December decision saw a volume increase of 1.4% from $5,081,425 to $5,154,801, alongside a significant liquidity spike of 50.8% to $592,473. This increase in liquidity indicates heightened trader interest and confidence, suggesting that market participants are actively positioning themselves ahead of the Fed's decision. The uptick in trading activity reflects a potentially more volatile sentiment as traders react to economic indicators and speculation around interest rates. In the short term, these changes are likely to lead to increased market fluctuations as participants adjust their positions leading up to the Fed's announcement."
     },
     {
+      "topic": "Will Trump meet with Putin again by...?",
+      "category": "crypto",
+      "ai_analysis": "The Polymarket event regarding Trump's potential meeting with Putin saw liquidity decrease by 18.3%, dropping from $89,734 to $73,328, alongside a minor increase in volume from $5,120,548 to $5,143,932. This decline in liquidity suggests a reduction in trader confidence or interest, which can lead to increased volatility and wider spreads in pricing. Sentiment appears to be cautious, with traders possibly reassessing the likelihood of such a meeting amid geopolitical uncertainties. In the short term, this could result in diminished trading activity and potentially lower market prices as participants may hesitate to engage without clearer signals."
+    },
+    {
       "topic": "Who will Trump nominate as Fed Chair?",
       "category": "crypto",
       "ai_analysis": "The Polymarket event regarding Trump’s nominee for Fed Chair saw a slight increase in trading volume from $5,166,764 to $5,184,758, indicating heightened interest despite no changes in liquidity. This uptick suggests that traders are actively speculating on potential candidates, which could influence market perceptions of future monetary policy. The lack of liquidity indicates that while there is interest, the market may not be as deep or stable, leading to potential volatility in responses to any news. In the short term, this could result in increased price swings as traders react to speculation or announcements related to the nomination process."
     },
     {
+      "topic": " 2nd Place in New York City Mayoral Election",
+      "category": "crypto",
+      "ai_analysis": "In the Polymarket event regarding the 2nd place in the New York City Mayoral Election, liquidity decreased by 2.1% ($-25,543), while trading volume slightly increased from $5,715,975 to $5,739,785. This decline in liquidity suggests a reduction in trader confidence or interest, potentially signaling uncertainty about the candidates' standings. The slight uptick in volume indicates that while some traders are still actively participating, others may be retreating, reflecting mixed sentiment. In the short term, this could lead to increased volatility as fewer participants may result in larger price swings with any new information impacting the election."
+    },
+    {
+      "topic": "Which countries will Donald Trump visit in 2025?",
+      "category": "crypto",
+      "ai_analysis": "The Polymarket event on Donald Trump's potential 2025 visits saw a slight increase in volume from $6,172,442 to $6,174,856, indicating heightened interest or speculation among traders. This change suggests that traders may be anticipating significant developments regarding Trump's travel plans, which could influence political narratives and voter sentiment leading into the 2024 election cycle. Given the static liquidity at $0, it indicates that there are currently no active market makers willing to facilitate trades, reflecting cautious trader sentiment. In the short term, this minimal volume increase might lead to heightened volatility as traders react to any news or developments related to Trump's itinerary."
+    },
+    {
+      "topic": "Who will Trump pardon in 2025?",
+      "category": "crypto",
+      "ai_analysis": "The Polymarket event on Trump's potential pardons in 2025 experienced a slight volume increase of 0.6%, rising from $7,183,010 to $7,228,606, while liquidity dropped by 5.0% from $235,799 to $223,941. This decline in liquidity indicates a tightening market, potentially signaling trader caution or uncertainty regarding the event's outcome. With traders likely reassessing their positions, the decrease in liquidity may lead to increased volatility in the short term as participants react to the shifting dynamics. Overall, the market's slight uptick in volume amidst declining liquidity suggests a complex sentiment where interest remains but confidence is wavering."
+    },
+    {
       "topic": "Lisa Cook out as Fed Governor by...?",
       "category": "crypto",
       "ai_analysis": "The Polymarket event regarding Lisa Cook's potential ousting as Fed Governor saw a slight increase in trading volume from $9,764,672 to $9,765,960, indicating heightened interest in this outcome. This matters for the market as changes in Fed leadership can significantly influence monetary policy and market stability, particularly in light of ongoing inflation concerns. Trader sentiment appears cautious yet engaged, as the lack of liquidity suggests that while trades are occurring, participants are likely waiting for clearer signals before committing larger sums. In the short term, this slight uptick in volume could lead to increased volatility as traders react to any new developments surrounding Cook's tenure."
+    },
+    {
+      "topic": "US recession in 2025?",
+      "category": "crypto",
+      "ai_analysis": "The Polymarket event regarding a potential US recession in 2025 saw a 3.8% decrease in liquidity, dropping from $93,627 to $90,091, alongside a modest uptick in volume from $9,877,790 to $9,879,083. This decline in liquidity indicates a tightening market, which may reflect traders' hesitance or uncertainty surrounding economic forecasts. Sentiment appears cautious, with traders potentially reassessing their positions in light of fluctuating economic indicators and recession fears. In the short term, this could lead to increased volatility as the market adjusts to lower liquidity and the ongoing debate about economic conditions."
     },
     {
       "topic": "Jerome Powell out as Fed Chair in 2025?",
@@ -27,9 +52,34 @@
       "ai_analysis": "The Polymarket event on Fed rate cuts in 2025 saw liquidity decrease by 8.1%, dropping from $1,220,085 to $1,121,812, alongside a similar decline in CLOB liquidity. This reduction signals decreased confidence among traders regarding the timing and magnitude of future rate cuts, which could affect monetary policy expectations. As volume increased slightly from $21,206,224 to $21,290,886, it suggests that while some traders remain active, overall sentiment has turned cautious with diminished liquidity. In the short term, this could lead to increased volatility in market predictions surrounding Fed policy, as traders reassess their positions amid shifting economic indicators."
     },
     {
-      "topic": "Fed decision in October?",
+      "topic": "What price will Ethereum hit in 2025?",
       "category": "crypto",
-      "ai_analysis": "In October, Polymarket experienced a significant surge in trading activity regarding the Fed's decision, with volume increasing by 101.7% from $114,518,102 to $230,983,486 and liquidity rising by 143.4% from $6,035,075 to $14,688,284. This change indicates heightened market interest and uncertainty surrounding monetary policy, as traders react to potential rate adjustments. The influx of liquidity, particularly with a 17.8% increase in CLOB liquidity to $2,224,306, suggests that traders are actively positioning themselves for volatility. In the short term, this could lead to more dynamic pricing and greater opportunities for speculation as traders adjust their strategies in response to anticipated Fed actions"
+      "ai_analysis": "The Polymarket event on Ethereum's price in 2025 saw liquidity increase by 21.1%, from $671,500 to $813,393, alongside a slight rise in volume from $27,251,755 to $27,288,337. This increase in liquidity indicates heightened trader interest and confidence in Ethereum's future price dynamics, which is crucial as it suggests a more active market for speculators. Trader sentiment appears bullish, likely driven by recent positive developments in the crypto space, as evidenced by the significant capital influx. In the short term, this could lead to increased volatility and potentially higher price predictions as more traders engage with the market."
+    },
+    {
+      "topic": "What price will Bitcoin hit in 2025?",
+      "category": "crypto",
+      "ai_analysis": "The Polymarket event regarding Bitcoin's price in 2025 saw liquidity increase by 8.3%, adding $84,051, resulting in total liquidity rising to $1,095,324. This uptick in liquidity and trading volume, which grew from $39,127,725 to $39,275,355, indicates heightened interest and confidence among traders regarding Bitcoin's future valuation. Trader sentiment appears optimistic, likely driven by recent bullish trends or favorable market news, as evidenced by the increased activity. In the short term, this could lead to increased volatility and price movement as more participants engage with the market."
+    },
+    {
+      "topic": "Republican Presidential Nominee 2028",
+      "category": "crypto",
+      "ai_analysis": "The Polymarket event for the Republican Presidential Nominee in 2028 saw a volume increase of 0.6% to $66,715,487 and liquidity rise by 3.6% to $4,336,366. This uptick indicates growing trader interest and confidence in the event, likely driven by emerging candidates or political developments. As trader sentiment shifts, the increased liquidity suggests a healthier market for speculating on potential nominees. In the short term, this could lead to more active trading and volatility as participants adjust their positions based on evolving political landscapes."
+    },
+    {
+      "topic": "Presidential Election Winner 2028",
+      "category": "crypto",
+      "ai_analysis": "The Polymarket event for the 2028 Presidential Election Winner saw a volume increase of 0.6%, rising from $99,193,441 to $99,822,971, while liquidity slightly decreased from $8,944,730 to $8,940,882. This uptick in volume suggests growing interest and activity among traders as the election approaches, which is crucial for market dynamics and price setting. Trader sentiment appears bullish, indicating a heightened confidence in certain candidates or potential outcomes, as evidenced by the increased trading activity. In the short term, this could lead to more volatility as positions are adjusted, influencing the odds and prices associated with specific candidates."
+    },
+    {
+      "topic": "Democratic Presidential Nominee 2028",
+      "category": "crypto",
+      "ai_analysis": "The Polymarket event regarding the 2028 Democratic Presidential Nominee saw a liquidity decrease of 2.4%, dropping from $14,332,416 to $13,981,320, while trading volume slightly increased from $246,511,439 to $247,226,105. This decline in liquidity indicates a potential loss of trader confidence or interest in this market, which could hinder the ability to execute large trades without impacting prices. Trader sentiment appears cautious, as evidenced by the drop in liquidity despite a modest rise in volume, suggesting a preference for more stable or predictable markets. In the short term, this could lead to increased volatility and wider spreads, making trading less attractive for participants."
+    },
+    {
+      "topic": "New York City Mayoral Election",
+      "category": "crypto",
+      "ai_analysis": "The Polymarket event for the New York City Mayoral Election saw a 0.8% increase in volume, rising from $321,800,614 to $324,408,295, and a 2.9% increase in liquidity, from $23,211,932 to $23,893,963. This uptick indicates heightened interest and confidence among traders regarding the election outcomes, suggesting that more participants are willing to engage in betting on this event. Trader sentiment appears bullish, as the increased liquidity signifies a more robust market for potential bets, which could lead to more accurate pricing of candidates’ probabilities. In the short term, this could result in increased volatility as traders react to emerging news and developments surrounding the election."
     }
   ]
 }
