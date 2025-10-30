@@ -204,27 +204,17 @@ class AIAnalyzer:
         
         try:
             prompt = f"""
-Analyze this Polymarket event and provide comprehensive market insights:
+Analyze this Polymarket event and provide 3-4 line market impact analysis:
 
 TOPIC: {event_title}
-DESCRIPTION: {event_description[:300]}...
+DESCRIPTION: {event_description[:400]}...
 CATEGORY: {topic.upper()}
 
-DETAILED MARKET CHANGES:
-{', '.join(changes.get('significant_events', ['No significant changes']))}
+MARKET CHANGES: {', '.join(changes.get('significant_events', ['No significant changes']))}
 
-MARKET METRICS:
-- Volume: ${changes.get('market_metrics', {}).get('old_volume', 0) or 0:,.0f} → ${changes.get('market_metrics', {}).get('new_volume', 0) or 0:,.0f}
-- Liquidity: ${changes.get('market_metrics', {}).get('old_liquidity', 0) or 0:,.0f} → ${changes.get('market_metrics', {}).get('new_liquidity', 0) or 0:,.0f}
+METRICS: Volume ${changes.get('market_metrics', {}).get('old_volume', 0) or 0:,.0f}→${changes.get('market_metrics', {}).get('new_volume', 0) or 0:,.0f} | Liquidity ${changes.get('market_metrics', {}).get('old_liquidity', 0) or 0:,.0f}→${changes.get('market_metrics', {}).get('new_liquidity', 0) or 0:,.0f}
 
-Provide a comprehensive, detailed analysis covering:
-1. What specific market activity occurred and the magnitude (include specific numbers)
-2. Potential drivers and catalysts for these changes (what might have caused this)
-3. Market sentiment implications and trader behavior (what traders are thinking/doing)
-4. Risk assessment and future outlook (what could happen next)
-
-Be specific, detailed, and provide actionable insights. Use the actual numbers and data provided. Write 4-5 complete sentences with comprehensive analysis.
-"""
+Provide ONLY 3-4 concise sentences covering: (1) what specific outcome is likely and why based on the event description, (2) why it matters and specific impact on crypto/stocks, (3) trader sentiment/behavior shown by volume changes, (4) short-term price/market impact. Include specific numbers and probabilities."""
             
             headers = {
                 "Authorization": f"Bearer {settings.openai_api_key}",
@@ -236,7 +226,7 @@ Be specific, detailed, and provide actionable insights. Use the actual numbers a
                 "messages": [
                     {"role": "user", "content": prompt}
                 ],
-                "max_tokens": 500,
+                "max_tokens": 150,
                 "temperature": 0.7
             }
             
@@ -278,6 +268,8 @@ Be specific, detailed, and provide actionable insights. Use the actual numbers a
                 logger.info(f"Analyzing: {event.get('event_title', 'Unknown')}")
                 
                 differences_data = event.get('differences_data', {})
+                if isinstance(differences_data, str):
+                    differences_data = json.loads(differences_data) if differences_data else {}
                 changes = self.extract_key_changes(differences_data)
                 
                 topic = self.categorize_topic(event)
