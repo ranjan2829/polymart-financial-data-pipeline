@@ -52,3 +52,4 @@ FROM market_differences md
 JOIN events e ON md.event_id = e.id
 JOIN markets m ON md.market_id = m.id
 ORDER BY md.compared_at DESC;
+
